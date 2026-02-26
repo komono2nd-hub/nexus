@@ -1,4 +1,3 @@
-// 共通JavaScript
 document.addEventListener('DOMContentLoaded', () => {
 
   // ヘッダー スクロール検知
@@ -15,11 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.classList.toggle('active');
   });
 
-  // アクティブナビ
-  const path = window.location.pathname;
+  // アクティブナビ（静的HTML用: ファイル名で判定）
+  const filename = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-menu a').forEach(a => {
-    if (a.getAttribute('href') === path ||
-        (path.startsWith(a.getAttribute('href')) && a.getAttribute('href') !== '/')) {
+    const href = a.getAttribute('href') || '';
+    const hrefFile = href.split('/').pop() || 'index.html';
+    if (hrefFile === filename || (filename === '' && hrefFile === 'index.html')) {
       a.classList.add('active');
     }
   });
